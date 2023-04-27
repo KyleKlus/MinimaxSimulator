@@ -24,7 +24,7 @@ public class RegisterUpdateDialog extends ValueUpdateDialog {
      *          the {@link Traceable} value of the register
      */
     public RegisterUpdateDialog(String register, Traceable<Integer> value) {
-        super(value.get(), false);
+        super(value.get(), true);
 
         this.value = value;
 

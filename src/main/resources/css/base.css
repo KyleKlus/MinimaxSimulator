@@ -11,7 +11,8 @@
     -fx-background-insets: 0, 1, 2;
 }
 
-.menu:hover, .menu:showing {
+.menu:hover,
+.menu:showing {
     -fx-background-radius: 30;
 }
 
@@ -23,7 +24,20 @@
     -fx-background-radius: 8;
 }
 
-#memtable_dec, #memtable_hex, #memtable_bin, #memtable_address, #register_dec, #register_hex, #col_jumptarget, #col_condition, #col_address, #ADDRESS, #alu_dec, #alu_hex {
+#memtable_dec,
+#memtable_hex,
+#memtable_bin,
+#memtable_address,
+#register_dec,
+#register_bin,
+#register_hex,
+#col_jumptarget,
+#col_condition,
+#col_address,
+#ADDRESS,
+#alu_dec,
+#alu_bin,
+#alu_hex {
     -fx-alignment: CENTER;
 }
 
@@ -42,11 +56,12 @@
     -fx-cell-size: 18px;
 }
 
-#simtable .table-row-cell, #signaltable .table-row-cell {
+#simtable .table-row-cell,
+#signaltable .table-row-cell {
     -fx-font-size: 12px;
 }
 
-#simtable .column-header .label{
+#simtable .column-header .label {
     -fx-font-size: 12px;
 }
 
@@ -63,7 +78,7 @@
     -fx-max-height: 100px;
 }
 
-#signaltable .column-header .label{
+#signaltable .column-header .label {
     -fx-font-size: 12px;
 }
 

@@ -15,6 +15,7 @@ import de.uni_hannover.sra.minimax_simulator.model.signal.SignalTableListener;
 import de.uni_hannover.sra.minimax_simulator.model.signal.jump.Jump;
 import de.uni_hannover.sra.minimax_simulator.resources.TextResource;
 import de.uni_hannover.sra.minimax_simulator.ui.UIUtil;
+import de.uni_hannover.sra.minimax_simulator.util.Util;
 import de.uni_hannover.sra.minimax_simulator.ui.gui.components.dialogs.ExceptionDialog;
 import de.uni_hannover.sra.minimax_simulator.ui.gui.components.dialogs.RegisterUpdateDialog;
 import de.uni_hannover.sra.minimax_simulator.ui.gui.components.tableview.CenteredCellPane;
@@ -131,6 +132,8 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
         }
 
         final List<TableColumn> tableColumns = new ArrayList<>(Arrays.asList(colRegName, colRegDec, colRegBin, colRegHex, colAluDec, colAluBin, colAluHex));
+
+
         for (TableColumn col : tableColumns) {
             col.setText(res.get(col.getId().replace("_", ".")));
         }
@@ -540,7 +543,7 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
             else {
                 String formatString = register.getSize().getHexFormat();
                 decimal = Integer.toString(value.get());
-                binary = Integer.toString(value.get(), 2);
+                binary = Util.to32BitBinary(value.get());
                 hex = String.format(formatString, value.get());
             }
             this.decimal = new SimpleStringProperty(decimal);
@@ -657,7 +660,7 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
             }
             else {
                 this.decimal = new SimpleStringProperty(String.valueOf(value));
-                this.binary = new SimpleStringProperty(Integer.toString(value, 2));
+                this.binary = new SimpleStringProperty(Util.to32BitBinary(value));
                 this.hex = new SimpleStringProperty(String.format("0x%08X", value));
             }
         }

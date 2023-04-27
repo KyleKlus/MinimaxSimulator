@@ -34,12 +34,15 @@
                                 <TableView fx:id="regTable" prefWidth="532.0" GridPane.halignment="CENTER">
                                     <columns>
                                         <PTableColumn id="register_name" fx:id="colRegName" percentageWidth="0.385"
-                                                      prefWidth="214.0" resizable="false" sortable="false" text="Name"/>
+                                                      prefWidth="214.0" resizable="true" sortable="false" text="Name"/>
                                         <PTableColumn id="register_dec" fx:id="colRegDec" percentageWidth="0.29"
-                                                      prefWidth="150.0" resizable="false" sortable="false"
+                                                      prefWidth="150.0" resizable="ture" sortable="false"
                                                       text="Dezimal"/>
+                                        <PTableColumn id="register_bin" fx:id="colRegBin" percentageWidth="0.29"
+                                                      prefWidth="180.0" resizable="true" sortable="false"
+                                                      text="Bin"/>
                                         <PTableColumn id="register_hex" fx:id="colRegHex" percentageWidth="0.29"
-                                                      prefWidth="150.0" resizable="false" sortable="false"
+                                                      prefWidth="150.0" resizable="true" sortable="false"
                                                       text="Hexadezimal"/>
                                     </columns>
                                 </TableView>
@@ -74,9 +77,11 @@
                                            GridPane.halignment="CENTER" GridPane.valignment="TOP">
                                     <columns>
                                         <PTableColumn id="alu_dec" fx:id="colAluDec" percentageWidth="0.498"
-                                                      resizable="false" sortable="false" text="Dezimal"/>
+                                                      resizable="true" sortable="false" text="Dezimal"/>
+                                        <PTableColumn id="alu_bin" fx:id="colAluBin" percentageWidth="0.498"
+                                                      resizable="true" sortable="false" text="Bin"/>
                                         <PTableColumn id="alu_hex" fx:id="colAluHex" percentageWidth="0.497"
-                                                      resizable="false" sortable="false" text="Hexadezimal"/>
+                                                      resizable="true" sortable="false" text="Hexadezimal"/>
                                     </columns>
                                 </TableView>
                             </children>

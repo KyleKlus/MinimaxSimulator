@@ -52,10 +52,12 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
     @FXML private TableView<RegisterTableModel> regTable;
     @FXML private TableColumn<RegisterTableModel, String> colRegName;
     @FXML private TableColumn<RegisterTableModel, String> colRegDec;
+    @FXML private TableColumn<RegisterTableModel, String> colRegBin;
     @FXML private TableColumn<RegisterTableModel, String> colRegHex;
 
     @FXML private TableView<AluTableModel> aluTable;
     @FXML private TableColumn<AluTableModel, String> colAluDec;
+    @FXML private TableColumn<AluTableModel, String> colAluBin;
     @FXML private TableColumn<AluTableModel, String> colAluHex;
 
     @FXML private TableView<SimulationTableModel> simTable;
@@ -128,7 +130,7 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
             col.setText(resSignal.get(col.getId().replace("_", ".")));
         }
 
-        final List<TableColumn> tableColumns = new ArrayList<>(Arrays.asList(colRegName, colRegDec, colRegHex, colAluDec, colAluHex));
+        final List<TableColumn> tableColumns = new ArrayList<>(Arrays.asList(colRegName, colRegDec, colRegBin, colRegHex, colAluDec, colAluBin, colAluHex));
         for (TableColumn col : tableColumns) {
             col.setText(res.get(col.getId().replace("_", ".")));
         }
@@ -186,6 +188,7 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
     private void initRegTable() {
         colRegName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colRegDec.setCellValueFactory(new PropertyValueFactory<>("decimal"));
+        colRegBin.setCellValueFactory(new PropertyValueFactory<>("binary"));
         colRegHex.setCellValueFactory(new PropertyValueFactory<>("hex"));
 
         // open edit dialog at double click
@@ -210,6 +213,7 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
      */
     private void initAluTable() {
         colAluDec.setCellValueFactory(new PropertyValueFactory<>("decimal"));
+        colAluBin.setCellValueFactory(new PropertyValueFactory<>("binary"));
         colAluHex.setCellValueFactory(new PropertyValueFactory<>("hex"));
 
         updateAluTable();
@@ -511,6 +515,7 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
 
         private final SimpleStringProperty name;
         private final SimpleStringProperty decimal;
+        private final SimpleStringProperty binary;
         private final SimpleStringProperty hex;
 
         /**
@@ -525,17 +530,21 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
             this.name = new SimpleStringProperty(register.getName());
 
             String decimal;
+            String binary;
             String hex;
             if (value == null) {
                 decimal = "--";
+                binary = "--";
                 hex = "--";
             }
             else {
                 String formatString = register.getSize().getHexFormat();
                 decimal = Integer.toString(value.get());
+                binary = Integer.toString(value.get(), 2);
                 hex = String.format(formatString, value.get());
             }
             this.decimal = new SimpleStringProperty(decimal);
+            this.binary = new SimpleStringProperty(binary);
             this.hex = new SimpleStringProperty(hex);
         }
 
@@ -580,6 +589,26 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
         }
 
         /**
+         * Gets the register value as binary number.
+         *
+         * @return
+         *          the register's value as binary number
+         */
+        public String getBinary() {
+            return binary.get();
+        }
+
+        /**
+         * Sets the binary representation of the register's value to the specified value.
+         *
+         * @param binary
+         *          the new decimal value
+         */
+        public void setBinary(String binary) {
+            this.binary.set(binary);
+        }
+
+        /**
          * Gets the register value as hexadecimal number.
          *
          * @return
@@ -611,6 +640,7 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
     public static class AluTableModel {
 
         private final SimpleStringProperty decimal;
+        private final SimpleStringProperty binary;
         private final SimpleStringProperty hex;
 
         /**
@@ -622,10 +652,12 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
         private AluTableModel (Integer value) {
             if (value == null) {
                 this.decimal = new SimpleStringProperty("--");
+                this.binary = new SimpleStringProperty("--");
                 this.hex = new SimpleStringProperty("--");
             }
             else {
                 this.decimal = new SimpleStringProperty(String.valueOf(value));
+                this.binary = new SimpleStringProperty(Integer.toString(value, 2));
                 this.hex = new SimpleStringProperty(String.format("0x%08X", value));
             }
         }
@@ -648,6 +680,26 @@ public class DebuggerView implements SimulationListener, MachineConfigListener, 
          */
         public void setDecimal(String decimal) {
             this.decimal.set(decimal);
+        }
+
+        /**
+         * Gets the register value as binary number.
+         *
+         * @return
+         *          the register's value as binary number
+         */
+        public String getBinary() {
+            return binary.get();
+        }
+
+        /**
+         * Sets the binary representation of the register's value to the specified value.
+         *
+         * @param binary
+         *          the new decimal value
+         */
+        public void setBinary(String binary) {
+            this.binary.set(binary);
         }
 
         /**
